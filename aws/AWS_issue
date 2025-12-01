@@ -1,0 +1,37 @@
+1. Navigate to the EC2 dashboard in the AWS Management Console
+
+2. In the left navigation pane, click on 'Instances'
+
+3. Locate the instance with ID 'i-02267dad07f25c194' in the list of instances
+
+4. Check the current state of the instance in the 'Instance state' column
+
+5. If the instance state is 'terminated':
+   - The instance cannot be started and you'll need to launch a new instance
+   - Consider launching a new instance with similar configurations
+
+6. If the instance state is 'stopping':
+   - Wait for the instance to fully stop
+   - Once stopped, try to start the instance again
+
+7. If the instance state is 'pending':
+   - Wait for the instance to complete its initialization
+   - Once the state changes to 'running' or 'stopped', you can manage it accordingly
+
+8. If the instance state is 'stopped':
+   - Select the instance
+   - Click on 'Instance state' in the top menu
+   - Choose 'Start instance'
+
+9. If the issue persists:
+   - Select the instance
+   - Click on 'Actions'
+   - Choose 'Instance settings' > 'View/Change instance settings'
+   - Review and ensure all settings are correct
+
+10. If you still encounter issues:
+    - Check the instance's system log for any error messages
+    - Select the instance, click on 'Actions', then 'Monitor and troubleshoot' > 'Get system log'
+
+11. If the problem continues:
+    - Contact AWS Support for further assistance, providing the instance ID and the error message
