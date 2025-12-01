@@ -1,0 +1,68 @@
+Step 1: Increase Swap Space
+Since your system is running low on RAM, creating swap space can help mitigate this issue. Swap space acts as overflow memory when your physical RAM is exhausted. To add swap space, follow these steps:
+
+Create a swap file:
+
+Run the following command to create a swap file of 1 GB (you can adjust the size if necessary):
+
+
+sudo fallocate -l 1G /swapfile
+If fallocate fails, you can use the dd command instead:
+
+
+sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+Set the correct permissions:
+
+Set the permissions so only root can access the swap file:
+
+
+sudo chmod 600 /swapfile
+Make the swap file:
+
+Turn the swap file into swap space:
+
+
+sudo mkswap /swapfile
+Activate the swap:
+
+Now, activate the swap space:
+
+
+sudo swapon /swapfile
+Verify the swap space:
+
+Check if the swap space was created successfully:
+
+
+sudo swapon --show
+Make the swap file permanent:
+
+To make the swap file persistent after a reboot, add the following line to the /etc/fstab file:
+
+
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+Step 2: Reduce Elasticsearch Heap Size
+Now that you've created swap space, you can try reducing the heap size for Elasticsearch to use less memory. Here's how you can adjust the heap size settings:
+
+Open the jvm.options file:
+
+
+sudo nano /etc/elasticsearch/jvm.options
+Find and modify the following lines (set the heap size to 512 MB or even 1 GB if you still have enough memory):
+
+
+-Xms512m
+-Xmx512m
+This sets the minimum and maximum heap size to 512 MB. If you're still facing memory issues, you can try setting it even lower.
+
+Save the file and exit the editor (CTRL+X, then Y, then ENTER).
+
+Step 3: Restart Elasticsearch
+After making these changes, restart Elasticsearch:
+
+
+sudo systemctl restart elasticsearch
+Then, check its status:
+
+
+sudo systemctl status elasticsearch

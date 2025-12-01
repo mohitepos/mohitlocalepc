@@ -1,0 +1,211 @@
+steps to install magento2 
+
+
+
+Step 1:- (install ubuntu setup as this video)
+https://www.youtube.com/watch?v=osqZnijkhtE
+
+
+
+Step 2: Add the Ondrej PPA for PHP 8.1
+1.Add the Ondrej PHP PPA repository:
+sudo add-apt-repository ppa:ondrej/php -y
+2.Update the package list again:
+sudo apt update -y
+
+
+
+Step 3: Install PHP 8.1 and Required Extensions
+sudo apt install -y php8.1 php8.1-cli php8.1-fpm php8.1-mysql php8.1-bcmath php8.1-gd php8.1-intl php8.1-mbstring php8.1-mysqlnd php8.1-pdo php8.1-soap php8.1-xml php8.1-zip
+
+
+Check php version 
+php -v
+
+
+Step 1: Install Apache
+sudo apt update
+sudo apt install apache2 -y
+
+
+Step 2: Start Apache Service
+
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+
+
+
+
+
+
+Switch php version 
+
+sudo update-alternatives --config php
+sudo systemctl restart apache2    # If you're using Apache
+
+disable old 8.3 and enable required php by this 
+
+sudo a2dismod php8.3
+
+
+
+
+
+Install magento2 by this :- 
+
+
+
+For Elastic Serah due to space use this 
+
+check elastic_blog.txt
+
+
+https://cloudinfrastructureservices.co.uk/how-to-setup-magento-server-on-azure-aws-gcp/
+
+sudo tail -f /var/log/apache2/error.log
+
+
+
+sudo composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.6 magento2
+
+
+
+php bin/magento setup:install \
+--base-url=http://13.49.246.78/magento2 \
+--db-host=localhost \
+--db-name=magento2 \
+--db-user=magento2 \
+--db-password=root \
+--admin-firstname=Admin \
+--admin-lastname=Admin \
+--admin-email=admin@admin.com \
+--admin-user=admin \
+--admin-password=admin@123 \
+--language=en_US \
+--currency=USD \
+--timezone=America/Chicago \
+--backend-frontname=admin \
+--search-engine=elasticsearch7 \
+--elasticsearch-host=localhost \
+--elasticsearch-port=9200
+
+
+
+permission for ubuntu user 
+sudo chown -R ubuntu:ubuntu /var/www/html/magento2
+sudo chmod -R 775 /var/www/html/magento2
+
+
+
+
+Specific Permissions for pub/static
+
+
+sudo chown -R ubuntu:ubuntu /var/www/html/magento2/pub/static
+sudo chmod -R 775 /var/www/html/magento2/pub/static
+
+
+
+
+
+
+
+php bin/magento config:set web/unsecure/base_url http://13.49.246.78/magento2/
+
+
+
+
+
+
+Steps For configure S3 :-
+
+
+
+
+
+use Webkul user Guide to create Bucket and 
+
+
+Acess the Image direct url add this - :
+
+Corrected JSON Bucket Policy:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowSpecificIAMUserAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::345594591608:user/s3-user"
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject",
+		"s3:GetObjectAcl",
+		"s3:GetObject",
+		"s3:ListBucket",
+		"s3:DeleteObject",
+		"s3:GetBucketAcl",
+		"s3:PutObjectAcl"
+      ],
+      "Resource": [
+        "arn:aws:s3:::tackwst/*",
+        "arn:aws:s3:::tackwst"
+      ]
+    },
+    {
+      "Sid": "AllowPublicRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::tackwst/*"
+    }
+  ]
+}
+
+
+Cross-origin resource sharing (CORS)
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "POST",
+            "GET",
+            "HEAD",
+            "PUT",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
+
+ACL issue Please Enable for temporary basis
+
+
+https://tackwst.s3.eu-north-1.amazonaws.com/
+
+
+
+
+ip: 44.207.134.5
+ftpuser: smldemo
+password: s@m!l@$m$
+home directory: /home/smldemo
+
+database: smldemo_db
+database user: smldemo
+database password: smnldemo@1123
+
+ssh smldemo@44.207.134.5
+
+
+

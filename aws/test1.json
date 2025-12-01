@@ -1,0 +1,1970 @@
+{
+	"info": {
+		"_postman_id": "8a894ace-a6a8-4b44-a67e-f3cac2a3e170",
+		"name": "test git1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29909892",
+		"_collection_link": "https://winter-meadow-171969.postman.co/workspace/My-Workspace~d23a7650-400c-425a-87c5-a7c4eee8e59b/collection/29909892-8a894ace-a6a8-4b44-a67e-f3cac2a3e170?action=share&source=collection_link&creator=29909892"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"status code validate\"]=responseCode.code==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test12+1@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "tst",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "est",
+							"type": "text"
+						},
+						{
+							"key": "profile_image",
+							"type": "file",
+							"src": "/Users/mac/Desktop/test-brand-2.jpeg"
+						},
+						{
+							"key": "password",
+							"value": "Admin123",
+							"type": "text"
+						},
+						{
+							"key": "phone_code",
+							"value": "+91",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "9999999990",
+							"type": "text"
+						},
+						{
+							"key": "device_token",
+							"value": "cBpG7czcSbWLi8z5xiIS-8:APA91bFdPKrL_bv94EHGHSUocTj…3EoOo3dyD5UKzrFqO1e5IMXKPkuCxbbejmQULtxGVEGqw4Chz",
+							"type": "text"
+						},
+						{
+							"key": "device_type",
+							"value": "android",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customers/register",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"emali validate\"]=responseBody.has(\"anjali12@thecodelab.me\");\r",
+							"tests[\"verify firstname\"]=responseBody.has(\"anji\");\r",
+							"tests[\"verify lastname\"]=responseBody.has(\"dixit\");\r",
+							"tests[\"status code validate\"]=responseCode.code==200;\r",
+							"tests[\"validating token\"]=responseBody.has(\"token\");\r",
+							"\r",
+							"var res = JSON.parse(responseBody);\r",
+							"console.log(res);\r",
+							"if (res[0] && res[0].data && res[0].data.token) {\r",
+							"    console.log('set');\r",
+							"    pm.environment.set(\"token\", res[0].data.token);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"test12@gmail.com\",\n\t\"password\": \"Admin123\",\n\t\"device\": {\n\t\t\"device_token\": \"789456123\",\n\t\t\"device_type\": \"Android\",\n\t\t\"device_model\": \"A2\",\n\t\t\"os_version\": \"OS\",\n\t\t\"app_version\": \"1\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customers/login",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sendsms",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"chandan2@thecodelab.tech\",\n\t\"mobile_no\": \"+918400051109\",\n    \"otp_type\": \"register\",\n    \"resendotp\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/sendsms",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"sendsms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_code\": \"+91\",\n\t\"mobile_no\": \"+919999999990\",\n    \"otp_code\": \"3091\",\n    \"otp_type\": \"register\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/verify",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"+917985505010\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/m246/pub/rest/V1/U/customers/forgotPassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"m246",
+						"pub",
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"forgotPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Stores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/stores",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "customer_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "est",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile_image",
+							"type": "file",
+							"src": "/home/chandan/Downloads/IMG_20230425_110732.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customers/editProfile",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"editProfile"
+					],
+					"query": [
+						{
+							"key": "customer_id",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mobile\": \"99999998\", \"new_password\": \"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/m246/pub/rest/V1/U/customers/resetPassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"m246",
+						"pub",
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"resetPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Home",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"status code validate\"]=responseCode.code==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/home?lat=28.5607361&long=77.340176",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"home"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "28.5607361"
+						},
+						{
+							"key": "long",
+							"value": "77.340176"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get stores product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/storesProduct/?searchCriteria[storeId]=12",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"storesProduct",
+						""
+					],
+					"query": [
+						{
+							"key": "searchCriteria[pageSize]",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[currentPage]",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][field]",
+							"value": "sku",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][value]",
+							"value": "%25MB%25",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][condition_type]",
+							"value": "like",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][field]",
+							"value": "sku",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][value]",
+							"value": "%25WB%25",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][condition_type]",
+							"value": "like",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][value]",
+							"value": "38",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][condition_type]",
+							"value": "from",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][value]",
+							"value": "40",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][condition_type]",
+							"value": "to",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[storeId]",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productdetails by productid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/productdetails/7/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"productdetails",
+						"7",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "social register signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"chandan3@thecodelab.me\",\n    \"firstname\":\"First\",\n    \"lastname\":\"Last\",\n    \"password\" : \"\",\n    \"phone_code\": \"+91\",\n    \"mobile\": \"8917048554\",\n    \"otp\": \"6015\",\n    \"social_register_type\" : \"I\",\n    \"apple_token\": \"\",\n    \"device\": {\n\t\t\"device_token\": \"1234\",\n\t\t\"device_model\": \"A3\"\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customers/socialregister",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customers",
+						"socialregister"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "storesPageProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/storesPageProduct/?searchCriteria[storeId]=15&searchCriteria[lat]=28.5607361&searchCriteria[long]=77.340176",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"storesPageProduct",
+						""
+					],
+					"query": [
+						{
+							"key": "searchCriteria[storeId]",
+							"value": "15"
+						},
+						{
+							"key": "searchCriteria[lat]",
+							"value": "28.5607361"
+						},
+						{
+							"key": "searchCriteria[long]",
+							"value": "77.340176"
+						},
+						{
+							"key": "searchCriteria[pageSize]",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[currentPage]",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[keyword]",
+							"value": "Jacket",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][value]",
+							"value": "38",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][condition_type]",
+							"value": "from",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][value]",
+							"value": "50",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][condition_type]",
+							"value": "to",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][value]",
+							"value": "38",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][condition_type]",
+							"value": "from",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][3][filters][0][field]",
+							"value": "category_id",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][3][filters][0][value]",
+							"value": "16",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][3][filters][0][condition_type]",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][4][filters][0][field]",
+							"value": "size",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][4][filters][0][value]",
+							"value": "91",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][4][filters][0][condition_type]",
+							"value": "eq",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][5][filters][0][field]",
+							"value": "size",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][5][filters][0][value]",
+							"value": "91,92",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][5][filters][0][condition_type]",
+							"value": "in",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Magento-categories-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/categories/21/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"categories",
+						"21",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchTerm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/searchTerm?searchCriteria[keyword]=Joust Duffle",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"searchTerm"
+					],
+					"query": [
+						{
+							"key": "searchCriteria[lat]",
+							"value": "28.5607361",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[long]",
+							"value": "77.340176",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[pageSize]",
+							"value": "4",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[currentPage]",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][field]",
+							"value": "sku",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][value]",
+							"value": "%25MB%25",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][0][condition_type]",
+							"value": "like",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][field]",
+							"value": "sku",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][value]",
+							"value": "%25WB%25",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][0][filters][1][condition_type]",
+							"value": "like",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][value]",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][1][filters][0][condition_type]",
+							"value": "from",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][field]",
+							"value": "price",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][value]",
+							"value": "40",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filter_groups][2][filters][0][condition_type]",
+							"value": "to",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[barcode]",
+							"value": "7",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[keyword]",
+							"value": "Joust Duffle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchStoreQr",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/searchStoreQr/?qr_code=12",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"searchStoreQr",
+						""
+					],
+					"query": [
+						{
+							"key": "qr_code",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products-render-info-TEST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/products-render-info/?searchCriteria[filterGroups][0][filters][0][field]=sku&searchCriteria[filterGroups][0][filters][0][value]=test&searchCriteria[filterGroups][0][filters][0][conditionType]=eq&storeId=1&currencyCode=USD",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"products-render-info",
+						""
+					],
+					"query": [
+						{
+							"key": "searchCriteria[PageSize]",
+							"value": "20",
+							"disabled": true
+						},
+						{
+							"key": "searchCriteria[filterGroups][0][filters][0][field]",
+							"value": "sku"
+						},
+						{
+							"key": "searchCriteria[filterGroups][0][filters][0][value]",
+							"value": "test"
+						},
+						{
+							"key": "searchCriteria[filterGroups][0][filters][0][conditionType]",
+							"value": "eq"
+						},
+						{
+							"key": "storeId",
+							"value": "1"
+						},
+						{
+							"key": "currencyCode",
+							"value": "USD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Magento-category-products-link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/categories/21/products",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"categories",
+						"21",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categoryStores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/categoryStores/?cat_id=16",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"categoryStores",
+						""
+					],
+					"query": [
+						{
+							"key": "cat_id",
+							"value": "16"
+						},
+						{
+							"key": "lat",
+							"value": "28.5607361",
+							"disabled": true
+						},
+						{
+							"key": "long",
+							"value": "77.340176",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API-products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/products/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllFilters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/getFilters",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"getFilters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cartStores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/cartStores/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"cartStores",
+						""
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "57",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cartStoreInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/cartStoreInfo/?customerId=57&storeId=57",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"cartStoreInfo",
+						""
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "57"
+						},
+						{
+							"key": "storeId",
+							"value": "57"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addToCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cartItem\": {\n    \"sku\": \"bag-bundle-custom-1\",\n    \"qty\": 1,\n    \"product_option\": {\n        \"extension_attributes\" : {\n            \"bundle_options\": [\n                {\n                    \"option_id\":\"13\",\n                    \"option_qty\":\"1.0000\",\n                    \"option_selections\":[\"13\",\"14\"]\n                }\n            ]\n        }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/addToCart/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"addToCart",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "orderInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/orderItemInfo/?orderId=27",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"orderItemInfo",
+						""
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "27"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStorePickupData",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjU3LCJ1dHlwaWQiOjMsImlhdCI6MTcwMjg3ODMzNCwiZXhwIjoxNzAyODgxOTM0fQ.yGUBE8QtQWG-A_gvkAlmFlHUBNf8LqOaIyzmQPn10os",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/getStorePickupData/?storeId=15",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"getStorePickupData",
+						""
+					],
+					"query": [
+						{
+							"key": "storeId",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single-Store-Banners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/loadSliderByStoreId/15",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"loadSliderByStoreId",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveForLater",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/moveToSaveLater?quote_item_id=542",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"moveToSaveLater"
+					],
+					"query": [
+						{
+							"key": "quote_item_id",
+							"value": "542"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getWishlistData",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/getWishlistData/?customerId=57",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"getWishlistData",
+						""
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "57"
+						},
+						{
+							"key": "storeId",
+							"value": "57",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "moveToCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/moveToCart?wishlist_item_id=43",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"moveToCart"
+					],
+					"query": [
+						{
+							"key": "wishlist_item_id",
+							"value": "43"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customerinfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customerinfo",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customerinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cmsPage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/cmsPage/4",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"cmsPage",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TermsAndConditions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/gettermandcondition",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"gettermandcondition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPaymentMethodsList",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/getPaymentMethodsList/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"getPaymentMethodsList",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reviewCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/reviewCart/?storeId=63",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"reviewCart",
+						""
+					],
+					"query": [
+						{
+							"key": "storeId",
+							"value": "63"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addToCartByBarcode",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"barcode\": \"000007\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/addToCartByBarcode",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"addToCartByBarcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ordersList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/ordersList/?customerId=57",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"ordersList",
+						""
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "57"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/customerinfo/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"customerinfo",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "placeorder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"storeId\": 63,\n    \"quoteId\": 116,\n    \"pickup_time\": \"2024-01-15 10:30:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/placeorder/",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"placeorder",
+						""
+					],
+					"query": [
+						{
+							"key": "storeId",
+							"value": "57",
+							"disabled": true
+						},
+						{
+							"key": "quoteId",
+							"value": "116",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeWishListItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/removeWishListItem?wishlist_item_id=49",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"removeWishListItem"
+					],
+					"query": [
+						{
+							"key": "wishlist_item_id",
+							"value": "49"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download invoice pdf controller",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/Csmageapi/invoice/download/orderId/52",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"Csmageapi",
+						"invoice",
+						"download",
+						"orderId",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order-TakeOut",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/updateOrderStatus?orderId=61",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"updateOrderStatus"
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "61"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refund-single-item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/createRefund?orderId=55&item_id=113&qty=1",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"createRefund"
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "55"
+						},
+						{
+							"key": "item_id",
+							"value": "113"
+						},
+						{
+							"key": "qty",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stripePaymentIntent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/stripePaymentIntent",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"stripePaymentIntent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "homeSeeAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://test.justskipline.com/rest/V1/U/homeSeeAll?type=3",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"quytech",
+						"co"
+					],
+					"path": [
+						"rest",
+						"V1",
+						"U",
+						"homeSeeAll"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "28.5607361",
+							"disabled": true
+						},
+						{
+							"key": "long",
+							"value": "77.340176",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
